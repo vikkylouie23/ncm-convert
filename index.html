@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>NCM 本地转换工具</title>
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <h1>NCM 本地转换工具</h1>
+        <div class="hero-actions">
+          <button id="pick-files-button" class="primary-button" type="button">
+            选择文件开始转换
+          </button>
+          <input id="file-input" class="sr-only-file-input" type="file" multiple accept=".ncm,.uc,.kwm,.xm,.wav,.mp3,.flac,.m4a,.ogg,.tm0,.tm3,.qmc3,.qmc2,.qmc0,.qmcflac,.qmcogg,.tkm,.bkcmp3,.bkcm4a,.bkcflac,.bkcwav,.bkcape,.bkcogg,.bkcwma,.mggl,.mflac,.mflac0,.mgg,.mgg1,.mgg0,.666c6163,.6d7033,.6f6767,.6d3461,.776176,.tm2,.tm6,.cache,.vpr,.kgm,.kgma" />
+          <button id="download-all-button" class="secondary-button" disabled>
+            下载全部
+          </button>
+          <button id="zip-button" class="secondary-button" disabled>
+            生成 ZIP
+          </button>
+          <button id="clear-button" class="ghost-button" disabled>
+            清空结果
+          </button>
+        </div>
+      </header>
+
+      <main class="content-grid">
+        <section class="panel status-panel">
+          <div class="status-row">
+            <span>当前状态</span>
+            <strong id="status-text">等待选择文件</strong>
+          </div>
+          <div class="status-row">
+            <span>进度</span>
+            <strong id="progress-text">0 / 0</strong>
+          </div>
+          <div class="status-row">
+            <span>结果</span>
+            <strong id="summary-text">还没有转换结果</strong>
+          </div>
+          <div class="notice">
+            为了避免内存占用过高，建议分批处理大文件或大量文件。KGM/VPR 所需的
+            `kgm.mask` 已本地化。
+          </div>
+        </section>
+
+        <section class="panel tips-panel">
+          <h2>说明</h2>
+          <ul>
+            <li>核心解密逻辑沿用站点的浏览器本地处理方式。</li>
+            <li>结果格式取决于原始音频，未强制二次转码为 MP3。</li>
+            <li>封面图如果来自远程链接，首次写入元数据时可能仍需联网获取。</li>
+          </ul>
+        </section>
+      </main>
+
+      <section class="results-header">
+        <h2>转换结果</h2>
+        <span id="results-count">0 个文件</span>
+      </section>
+
+      <section id="results" class="results-list"></section>
+    </div>
+  </body>
+</html>
